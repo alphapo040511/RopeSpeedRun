@@ -47,7 +47,7 @@ public class Grab : MonoBehaviour
 
 
     //로프를 던지는 함수
-    public void StartGrab()
+    public void StartGrab(bool Dash)
     {
         Vector2 point = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3
             (Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z)); //마우스 커서 위치를 받아옴
@@ -55,6 +55,16 @@ public class Grab : MonoBehaviour
         line.enabled = true;                                                                    //라인 랜더러 활성화
 
         transform.LookAt(point);                                                                //마우스 커서 위치를 바라보게 한다.
+
+        if(Dash)                                                                                //대쉬 그랩일 경우
+        {
+            Spring.autoConfigureDistance = false;                                               //스프링 길이 자동 설정 false
+            Spring.distance = 0.5f;                                                             //스프링 길이 0.5로 변경
+        }
+        else
+        {
+            Spring.autoConfigureDistance = true;                                                //스프링 길이 자동 설정 true
+        }
 
         if(Physics.Raycast(Player.transform.position, transform.forward, out hit, RopeLength))  //마우스 커서 위치로 레이를 쏜다.
         {
