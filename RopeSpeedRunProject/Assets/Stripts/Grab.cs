@@ -8,9 +8,9 @@ public class Grab : MonoBehaviour
     public GameObject Player;
     private PlayerConroller playerClass;
 
-    private RaycastHit hit;                                 //로프를 던질 위치를 받아올 변수
+    private RaycastHit2D hit;                               //로프를 던질 위치를 받아올 변수
 
-    private SpringJoint2D Spring;                           //로프 효과를 위한 SpringJoint2D 컴포넌트
+    private DistanceJoint2D DistanceJoint2D;                //로프 효과를 위한 DistanceJoint2D 컴포넌트
 
     //라인 랜더러 설정
     private LineRenderer line;                              //라인 랜더러
@@ -32,7 +32,7 @@ public class Grab : MonoBehaviour
 
         line.positionCount = 2;                         //라인을 그릴때 꼭짓점으로 사용할 점의 개수
 
-        Spring = Player.GetComponent<SpringJoint2D>();  //SpringJoint2D 컴포넌트를 받아옴
+        DistanceJoint2D = GetComponent<DistanceJoint2D>();
     }
 
     // Update is called once per frame
@@ -58,19 +58,21 @@ public class Grab : MonoBehaviour
 
         if(Dash)                                                                                //대쉬 그랩일 경우
         {
-            Spring.autoConfigureDistance = false;                                               //스프링 길이 자동 설정 false
-            Spring.distance = 0.5f;                                                             //스프링 길이 0.5로 변경
+            DistanceJoint2D.autoConfigureDistance = false;                                      //조인트 길이 자동 설정 false
+            DistanceJoint2D.distance = 0.5f;                                                    //조인트 길이 0.5로 변경
         }
         else
         {
-            Spring.autoConfigureDistance = true;                                                //스프링 길이 자동 설정 true
+            DistanceJoint2D.autoConfigureDistance = true;                                       //조인트 길이 자동 설정 true
         }
 
-        if(Physics.Raycast(Player.transform.position, transform.forward, out hit, RopeLength))  //마우스 커서 위치로 레이를 쏜다.
+        hit = Physics2D.Raycast(Player.transform.position, transform.forward, RopeLength);      //마우스 커서 위치로 레이를 쏜다.
+
+        if (hit)                                                                                //레이가 부딪힌 물체가 있을때
         {
             if (hit.collider.transform.tag == "AbleGrab")                                       //매달릴 수 있는 물체일 때
             {
-                transform.DOMove(hit.point, 0.2f).SetEase(Ease.Linear).OnComplete(HangOn);      //목표 위치까지 이동후 고정
+                transform.DOMove(hit.point, 0.2f).SetEase(Ease.Linear).OnComplete(this.HangOn);   //목표 위치까지 이동후 고정
             }
             else                                                                                //매달릴 수 없는 물체일 때
             {
@@ -95,13 +97,8 @@ public class Grab : MonoBehaviour
     //매달리는 함수
     public void HangOn()
     {
-        Vector2 Pos = (Vector2)hit.point;                               //후크가 걸릴 위치
+        DistanceJoint2D.enabled = true;             //조인트 컴포넌트 활성화
 
-        Spring.enabled = true;                                          //스프링 컴포넌트 활성화
-        Spring.autoConfigureConnectedAnchor = false;                    //연결된 앵커 자동설정 비활성화
-        Spring.connectedAnchor = Pos;                                   //연결된 앵커 위치를 후크 위치로 설정
-
-        //float dis = Vector2.Distance((Vector2)transform.position, Pos); //후크와 플레이어 사이의 거리
-        //Spring.distance = dis * 9.5f;                                   //스프링 길이 설정
+        //길이에 관한 내용 추가 예정
     }
 }
