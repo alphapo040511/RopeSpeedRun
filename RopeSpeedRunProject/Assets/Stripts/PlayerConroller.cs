@@ -37,11 +37,11 @@ public class PlayerConroller : MonoBehaviour
         IsDash.Update(Time.deltaTime);
 
 
-        float MoveX = Input.GetAxis("Horizontal") * speed;                              //수평 이동 값 저장
+        float MoveX = Input.GetAxis("Horizontal");                                      //수평 이동 값 저장
 
-        if (!IsDash.IsRunning())                //대쉬를 진행하는 중이 아닐때
+        if (!IsDash.IsRunning() && MoveX != 0)                                          //대쉬를 진행하는 중이 아닐때
         {
-            m_rigidbody2D.velocity = new Vector2(MoveX, m_rigidbody2D.velocity.y);      //수평이동 입력
+            Movement(MoveX);                    //이동 함수
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())                            //현재 땅에 있고, 스페이스를 눌렀을때
@@ -82,6 +82,11 @@ public class PlayerConroller : MonoBehaviour
                 Grab(true);         //그랩 함수
             }
         }
+    }
+
+    public void Movement(float MoveX)
+    {
+        m_rigidbody2D.velocity = new Vector2(MoveX * speed, m_rigidbody2D.velocity.y);      //수평이동 입력
     }
 
     private void Grab(bool Dash)    

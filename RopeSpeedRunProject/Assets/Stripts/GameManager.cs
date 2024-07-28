@@ -39,5 +39,6 @@ public class GameManager : MonoBehaviour
     public void EndGame()                       //게임 종료
     {
         TimeScore = Time.time - startTime;      //타임 스코어를 넣어줌
+        Debug.Log(TimeScore + "초");
     }
 }
