@@ -6157,6 +6157,27 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4592209508866834999, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
   m_PrefabInstance: {fileID: 1891019871}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1083969155
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083969152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d0562848fe6724c429b125246b7e039f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1116699623
 GameObject:
   m_ObjectHideFlags: 0
@@ -10412,6 +10433,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797711784631426426, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797711784631426426, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1341310406, guid: 8e5a6a43757405049a87fb123f2a47e9, type: 3}
+    - target: {fileID: 1797711784631426426, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797711784631426426, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
@@ -10444,6 +10477,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2125300589}
     - target: {fileID: 8342645719694072112, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1083969155}
+    - target: {fileID: 8342645719694072112, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
       propertyPath: isGrapped
       value: 0
       objectReference: {fileID: 0}
@@ -10454,7 +10491,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3145049241628865344, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1083969155}
   m_SourcePrefab: {fileID: 100100000, guid: a59f76e65dea6d74b9db32c747dfabd8, type: 3}
 --- !u!1 &1910459802
 GameObject:
