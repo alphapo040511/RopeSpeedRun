@@ -45,6 +45,7 @@ public class ScoreChecker : MonoBehaviour
     private void GameStart()        //게임 시작 함수
     {
         IsPlay = true;              //게임 시작
+        conroller.IsPlay = true;    //플레이 중 활성화
         conroller.Movement(0);      //움직임 일단 정지
         gameManager.GameStart();    //게임 메니저에 게임 시작 함수 호출
     }

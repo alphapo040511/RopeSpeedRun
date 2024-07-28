@@ -11,6 +11,8 @@ public class PlayerConroller : MonoBehaviour
     public LayerMask m_WhatIsGround;                        //땅에 해당하는 오브젝트가 존재하는 레이어 마스크
     public Transform GroundCheck;                           //땅에 있는지 체크하기 위한 빈 오브젝트의 Transform
 
+    public bool IsPlay = false;                             //플레이 중인지 확인
+
     private Rigidbody2D m_rigidbody2D;
 
     [SerializeField] private float speed = 5.0f;            //이동속도
@@ -32,6 +34,8 @@ public class PlayerConroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsPlay) return;                    //플레이 중이 아니면 리턴
+
         //타이머의 시간 갱신
         RopeCoolTime.Update(Time.deltaTime);
         IsDash.Update(Time.deltaTime);
