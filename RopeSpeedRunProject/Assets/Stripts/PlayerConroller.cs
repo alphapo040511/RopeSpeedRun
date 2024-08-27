@@ -53,7 +53,6 @@ public class PlayerConroller : MonoBehaviour
         else
         {
             animator.SetBool("IsRunning", false);
-            m_rigidbody2D.velocity = new Vector2(0, m_rigidbody2D.velocity.y);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !IsJump.IsRunning())     //현재 땅에 있고, 점프중이 아닐때 스페이스를 누르면
