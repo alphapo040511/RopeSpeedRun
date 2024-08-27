@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bc7e234cbe78b274db04c679bc67ee1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Interaction_Dis: 3
   m_TreasureName: "\uBCF4\uBB3C \uC774\uB984"
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bc7e234cbe78b274db04c679bc67ee1a, type: 3}
   m_Number: 0

@@ -6,6 +6,8 @@ using DG.Tweening;
 public class Goal : MonoBehaviour
 {
     public GameObject TreasureGroup;
+    public GameObject Door;
+    public ScoreChecker ScoreChecker;
 
     [Header("ÃÑ º¸¹° °³¼ö")][SerializeField] private int TotalTreasureCount;
 
@@ -17,7 +19,10 @@ public class Goal : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        TotalTreasureCount = TreasureGroup.transform.childCount;
+        if (TreasureGroup != null)
+        {
+            TotalTreasureCount = TreasureGroup.transform.childCount;
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +31,15 @@ public class Goal : MonoBehaviour
         if(TotalTreasureCount <= gameManager.treasureCount && !isOpen)
         {
             isOpen = true;
-            transform.DOMoveY(transform.position.y + 5, 1);
+            Door.transform.DOMoveY(transform.position.y + 10, 2);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Player" && isOpen)
+        {
+            ScoreChecker.GameStop();
         }
     }
 }

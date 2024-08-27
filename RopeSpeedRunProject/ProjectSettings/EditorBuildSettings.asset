@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RopeTestScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/GameScene.unity
+    guid: cf37c0f7f9417b04f987c0da003a8335
+  - enabled: 1
+    path: Assets/Scenes/GameLobby.unity
+    guid: a04d6f81716d12f4fbb5e6bf2ee1e7a7
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: fdaf120ff9a72c545afc5164873c6098
   m_configObjects: {}

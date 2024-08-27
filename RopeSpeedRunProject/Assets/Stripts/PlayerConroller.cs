@@ -24,6 +24,8 @@ public class PlayerConroller : MonoBehaviour
     private Timer IsDash = new Timer(0.2f);                 //대쉬 지속 시간
     private Timer IsJump = new Timer(0.5f);
 
+    private Vector2 LastPos;
+
     public bool isGrapped = false;                          //현재 매달려 있는지 확인할 bool 값
 
     // Start is called before the first frame update
@@ -136,10 +138,18 @@ public class PlayerConroller : MonoBehaviour
     {
         Collider2D[] groundColliers = Physics2D.OverlapCircleAll(GroundCheck.position , 0.2f, m_WhatIsGround);  //바닥을 인식하는 오브젝트 위치에서 오버랩서클로 바닥 인식
         
+
         for(int i = 0; i < groundColliers.Length; i++)              //인식한 모든 콜라이더중에
         {
+            if (groundColliers[i].tag == "Dead")                    //만약 밟은 물체가 죽는 판정 이라면
+            {
+                //transform.position = LastPos;
+                transform.position = new Vector3(-10, -5, 0);
+            }
+
             if (groundColliers[i].gameObject != gameObject)         //플레이어가 아닌 콜라이더가 있다면
             {
+                LastPos = transform.position;
                 return true;                                        //true 리턴
             }
         }

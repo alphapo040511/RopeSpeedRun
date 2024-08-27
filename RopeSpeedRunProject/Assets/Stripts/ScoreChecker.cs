@@ -25,10 +25,10 @@ public class ScoreChecker : MonoBehaviour
     {
         if (IsOver) return;                     //게임이 종료 됐으면 리턴
 
-        if(Input.GetKeyDown(KeyCode.E))         //E를 누르면 게임 오버 (임시로 만듦)
-        {
-            GameStop();
-        }
+        //if(Input.GetKeyDown(KeyCode.E))         //E를 누르면 게임 오버 (임시로 만듦)
+        //{
+        //    GameStop();
+        //}
 
         if(!IsPlay)                                                     //플레이 중이 아닐때 (준비상태)
         {
@@ -50,7 +50,7 @@ public class ScoreChecker : MonoBehaviour
         gameManager.GameStart();    //게임 메니저에 게임 시작 함수 호출
     }
 
-    private void GameStop()         //게임 종료 함수
+    public void GameStop()         //게임 종료 함수
     {
         IsOver = true;              //게임 종료
         gameManager.EndGame();      //게임 메니저에 게임 종료 함수 호출
