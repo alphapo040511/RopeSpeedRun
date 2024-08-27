@@ -8408,7 +8408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181be12a86eed524ebe5bdd6e48c5fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TreasureGroup: {fileID: 0}
+  TreasureGroup: {fileID: 91811490}
   Door: {fileID: 1025163270}
   ScoreChecker: {fileID: 1632523896}
   TotalTreasureCount: 0

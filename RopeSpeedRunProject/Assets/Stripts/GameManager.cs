@@ -64,6 +64,6 @@ public class GameManager : MonoBehaviour
 
     public void TitleSceneLoad()
     {
-        SceneManager.LoadScene("GameLobby");
+        SceneManager.LoadScene("TitleScene");
     }
 }

@@ -28,7 +28,7 @@ public class Goal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TotalTreasureCount <= gameManager.treasureCount && !isOpen)
+        if(TotalTreasureCount == gameManager.treasureCount && !isOpen)
         {
             isOpen = true;
             Door.transform.DOMoveY(transform.position.y + 10, 2);
