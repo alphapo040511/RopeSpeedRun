@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerConroller : MonoBehaviour
 {
     public Grab Hook;                                       //후크 오브젝트의 Grab 클래스
+    public Animator animator;                               //애니메이터
 
     private DistanceJoint2D DistanceJoint2D;                //로프 효과를 위한 DistanceJoint2D 컴포넌트
 
@@ -21,6 +22,7 @@ public class PlayerConroller : MonoBehaviour
 
     private Timer RopeCoolTime = new Timer(0.5f);           //로프 사용 쿨타임 설정
     private Timer IsDash = new Timer(0.2f);                 //대쉬 지속 시간
+    private Timer IsJump = new Timer(0.5f);
 
     public bool isGrapped = false;                          //현재 매달려 있는지 확인할 bool 값
 
@@ -39,6 +41,7 @@ public class PlayerConroller : MonoBehaviour
         //타이머의 시간 갱신
         RopeCoolTime.Update(Time.deltaTime);
         IsDash.Update(Time.deltaTime);
+        IsJump.Update(Time.deltaTime);
 
 
         float MoveX = Input.GetAxis("Horizontal");                                      //수평 이동 값 저장
@@ -47,11 +50,32 @@ public class PlayerConroller : MonoBehaviour
         {
             Movement(MoveX);                    //이동 함수
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())                            //현재 땅에 있고, 스페이스를 눌렀을때
+        else
         {
+            animator.SetBool("IsRunning", false);
+            m_rigidbody2D.velocity = new Vector2(0, m_rigidbody2D.velocity.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !IsJump.IsRunning())     //현재 땅에 있고, 점프중이 아닐때 스페이스를 누르면
+        {
+            IsJump.Start();                                                             //점프 타이머 시작
+            animator.SetBool("IsJumping", true);
             m_rigidbody2D.velocity = new Vector2(m_rigidbody2D.velocity.x,0);           //수직방향 속도 초기화
             m_rigidbody2D.AddForce(Vector2.up * JumpForce);                             //점프
+        }
+
+        if(!IsJump.IsRunning())
+        {
+            animator.SetBool("IsJumping", false);
+        }
+        
+        if(IsGrounded())
+        {
+            animator.SetBool("IsFalling", false);
+        }
+        else
+        {
+            animator.SetBool("IsFalling", true);
         }
 
         if(m_rigidbody2D.velocity.y >= 10)                                              //수직방향 속도가 최대속도를 넘어갔을때
@@ -73,6 +97,8 @@ public class PlayerConroller : MonoBehaviour
 
             Hook.transform.position = transform.position;                   //후크가 플레이어를 따라다니게 한다.
 
+            animator.SetBool("IsHook", false);
+
             if (Input.GetMouseButtonDown(0) && !RopeCoolTime.IsRunning())   //로프 재사용 대기시간이 아닐때 좌클릭을 하면
             {
                 Grab(false);        //그랩 함수
@@ -90,6 +116,8 @@ public class PlayerConroller : MonoBehaviour
 
     public void Movement(float MoveX)
     {
+        animator.SetBool("IsRunning",true);
+        transform.localScale = new Vector3(Mathf.Sign(MoveX), 1, 1);
         m_rigidbody2D.velocity = new Vector2(MoveX * speed, m_rigidbody2D.velocity.y);      //수평이동 입력
     }
 
@@ -98,6 +126,8 @@ public class PlayerConroller : MonoBehaviour
         RopeCoolTime.Start();           //타이머 실행
 
         isGrapped = true;               //그랩중 상태로 만듦
+
+        animator.SetBool("IsHook", true);
 
         Hook.StartGrab(Dash);           //후크를 날리는 함수 실행
     }
